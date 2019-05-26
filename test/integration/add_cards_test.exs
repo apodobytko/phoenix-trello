@@ -46,6 +46,7 @@ defmodule PhoenixTrello.AddCardsTest do
       board
       |> last_card
 
+    take_screenshot("test-reports/Clicking_on_a_previously_created_list.png")
     assert element_displayed?({:id, "card_#{card.id}"})
     assert page_source() =~ card.name
   end
