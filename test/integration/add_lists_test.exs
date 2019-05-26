@@ -21,7 +21,6 @@ defmodule PhoenixTrello.AddListsTest do
 
     click({:css, ".list.add-new"})
 
-    take_screenshot("test-reports/Clicking_on_a_previously_created_list.png")
     assert element_displayed?({:css, ".list.form"})
 
     new_list_form = find_element(:id, "new_list_form")
