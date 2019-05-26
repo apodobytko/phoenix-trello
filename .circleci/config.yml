@@ -25,12 +25,12 @@ jobs:
           keys:
           - dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
           - dependency-cache-v1-{{ .Branch }}
-          - dependency-cache-v1-{{ arch }}
+          - dependency-cache-v1
       - restore_cache:
           keys:
           - npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
           - npm-cache-v1-{{ .Branch }}
-          - npm-cache-v1-{{ arch }}
+          - npm-cache-v1
       - run: mix local.hex --force && mix local.rebar --force
       - run: mix deps.get && mix deps.compile
       - run: npm install
@@ -41,7 +41,7 @@ jobs:
           key: dependency-cache-v1-{{ .Branch }}
           paths: "deps"
       - save_cache:
-          key: dependency-cache-v1-{{ arch }}
+          key: dependency-cache-v1
           paths: "deps"
       - save_cache:
           key: npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
@@ -50,7 +50,7 @@ jobs:
           key: npm-cache-v1-{{ .Branch }}
           paths: "node_modules"
       - save_cache:
-          key: npm-cache-v1-{{ arch }}
+          key: npm-cache-v1
           paths: "node_modules"
       
       - run: ./node_modules/.bin/webpack
