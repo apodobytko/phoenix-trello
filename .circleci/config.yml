@@ -20,24 +20,20 @@ jobs:
           command: |
             chromedriver --port=4444 --url-base=wd/hub
           background: true
-        
+
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+
       - restore_cache:
           keys:
-          - dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
-          - dependency-cache-v1-{{ .Branch }}
-          - dependency-cache-v1
+            - dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - dependency-cache-v1-{{ .Branch }}
+            - dependency-cache-v1
       - restore_cache:
           keys:
-          - build-cache-v1-{{ .Branch }}
-          - build-cache-v1
-      - restore_cache:
-          keys:
-          - npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          - npm-cache-v1-{{ .Branch }}
-          - npm-cache-v1
-      - run: mix local.hex --force && mix local.rebar --force
-      - run: mix deps.get && mix deps.compile
-      - run: npm install
+            - build-cache-v1-{{ .Branch }}
+            - build-cache-v1
+      - run: mix do deps.get, compile --warnings-as-errors
       - save_cache:
           key: dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
@@ -53,6 +49,13 @@ jobs:
       - save_cache:
           key: build-cache-v1
           paths: "_build"
+
+      - restore_cache:
+          keys:
+            - npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - npm-cache-v1-{{ .Branch }}
+            - npm-cache-v1
+      - run: npm install && node_modules/.bin/webpack --mode production
       - save_cache:
           key: npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths: "node_modules"
@@ -62,9 +65,11 @@ jobs:
       - save_cache:
           key: npm-cache-v1
           paths: "node_modules"
-      
-      - run: ./node_modules/.bin/webpack
-      - run: mix compile --force --warnings-as-errors
+        
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
       - run: mix test --trace
 
       - store_artifacts:
