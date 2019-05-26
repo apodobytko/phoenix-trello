@@ -15,8 +15,7 @@ config :phoenix_trello, PhoenixTrello.Endpoint,
   root: Path.dirname(__DIR__),
   secret_key_base: "hWbd3QwLuaWKwJY5qYOKLGSBboxjnW46c4TzBAa+cMODz26RokgHQIJo6Nej3DGr",
   render_errors: [accepts: ~w(html json)],
-  pubsub: [name: PhoenixTrello.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: PhoenixTrello.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -25,7 +24,7 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
 
 # Configure phoenix generators
 config :phoenix, :generators,
@@ -35,8 +34,11 @@ config :phoenix, :generators,
 # Configure guardian
 config :guardian, Guardian,
   issuer: "PhoenixTrello",
-  ttl: { 3, :days },
+  ttl: {3, :days},
   verify_issuer: true,
   serializer: PhoenixTrello.GuardianSerializer
 
-config :hound, driver: "selenium", browser: "chrome"
+config :hound,
+  driver: "selenium",
+  browser: "chrome",
+  retry_time: 500
