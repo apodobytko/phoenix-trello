@@ -27,7 +27,7 @@ jobs:
       - run: npm install
       - run: ./node_modules/.bin/webpack
       - run: mix phoenix.digest
-      - run: mix test
+      - run: mix test --trace
 
       - store_artifacts:
           path: test-reports
