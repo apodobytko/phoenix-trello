@@ -27,5 +27,14 @@ defmodule PhoenixTrello.UserSocket do
 
   def connect(_params, _socket), do: :error
 
-  def id(socket), do: "users_socket:#{socket.assigns.current_user.id}"
+  def id(%{assigns: %{current_user: current_user}} = _socket) do
+    socket_id =
+      if current_user do
+        current_user.id
+      else
+        nil
+      end
+
+    "users_socket:#{socket_id}"
+  end
 end
