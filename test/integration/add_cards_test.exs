@@ -4,7 +4,7 @@ defmodule PhoenixTrello.AddCardsTest do
   alias PhoenixTrello.{Board}
 
   setup do
-    user = create_user
+    user = create_user()
     board = create_board(user)
 
     list =
@@ -47,7 +47,7 @@ defmodule PhoenixTrello.AddCardsTest do
       |> last_card
 
     assert element_displayed?({:id, "card_#{card.id}"})
-    assert page_source =~ card.name
+    assert page_source() =~ card.name
   end
 
   defp last_card(board) do

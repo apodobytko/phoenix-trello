@@ -1,12 +1,6 @@
 defmodule PhoenixTrello.CardTest do
   use PhoenixTrello.ModelCase
-
-  import PhoenixTrello.Factory
-
   alias PhoenixTrello.{Card}
-
-  @valid_attrs %{name: "some content"}
-  @invalid_attrs %{}
 
   setup do
     user = insert(:user)

@@ -1,8 +1,5 @@
 defmodule PhoenixTrello.CommentTest do
   use PhoenixTrello.ModelCase
-
-  import PhoenixTrello.Factory
-
   alias PhoenixTrello.Comment
 
   @valid_attrs %{text: "some content"}

@@ -4,8 +4,8 @@ defmodule PhoenixTrello.UserBoard do
   alias __MODULE__
 
   schema "user_boards" do
-    belongs_to :user, User
-    belongs_to :board, Board
+    belongs_to :user, PhoenixTrello.User
+    belongs_to :board, PhoenixTrello.Board
 
     timestamps()
   end

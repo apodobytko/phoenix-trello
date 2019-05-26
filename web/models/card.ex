@@ -11,9 +11,9 @@ defmodule PhoenixTrello.Card do
     field :position, :integer
     field :tags, {:array, :string}
 
-    belongs_to :list, List
-    has_many :comments, Comment
-    has_many :card_members, CardMember
+    belongs_to :list, PhoenixTrello.List
+    has_many :comments, PhoenixTrello.Comment
+    has_many :card_members, PhoenixTrello.CardMember
     has_many :members, through: [:card_members, :user]
 
     timestamps()

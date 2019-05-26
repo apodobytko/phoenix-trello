@@ -5,7 +5,7 @@ defmodule PhoenixTrello.SignUpTest do
   test "GET /sign_up" do
     navigate_to("/sign_up")
 
-    assert page_title == "Sign up | Phoenix Trello"
+    assert page_title() == "Sign up | Phoenix Trello"
     assert element_displayed?({:id, "sign_up_form"})
   end
 
@@ -43,7 +43,7 @@ defmodule PhoenixTrello.SignUpTest do
 
     assert element_displayed?({:id, "authentication_container"})
 
-    assert page_source =~ "John Doe"
-    assert page_source =~ "My boards"
+    assert page_source() =~ "John Doe"
+    assert page_source() =~ "My boards"
   end
 end

@@ -1,8 +1,5 @@
 defmodule PhoenixTrello.ListTest do
   use PhoenixTrello.ModelCase
-
-  import PhoenixTrello.Factory
-
   alias PhoenixTrello.{Repo, List}
 
   @valid_attrs %{name: "some content"}

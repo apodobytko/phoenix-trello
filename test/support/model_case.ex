@@ -21,6 +21,7 @@ defmodule PhoenixTrello.ModelCase do
       import Ecto.Model, except: [build: 2]
       import Ecto.Query, only: [from: 2]
       import PhoenixTrello.ModelCase
+      import PhoenixTrello.Factory
     end
   end
 

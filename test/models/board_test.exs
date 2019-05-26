@@ -1,8 +1,5 @@
 defmodule PhoenixTrello.BoardTest do
   use PhoenixTrello.ModelCase
-
-  import PhoenixTrello.Factory
-
   alias PhoenixTrello.Board
 
   @valid_attrs %{name: "some content"}

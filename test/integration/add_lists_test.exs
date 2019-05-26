@@ -4,7 +4,7 @@ defmodule PhoenixTrello.AddListsTest do
   alias PhoenixTrello.{Board}
 
   setup do
-    user = create_user
+    user = create_user()
     board = create_board(user)
 
     {:ok, %{user: user, board: board}}
@@ -17,7 +17,7 @@ defmodule PhoenixTrello.AddListsTest do
     navigate_to("/boards/#{Board.slug_id(board)}")
 
     assert element_displayed?({:css, ".view-container.boards.show"})
-    assert page_source =~ "Add new list..."
+    assert page_source() =~ "Add new list..."
 
     click({:css, ".list.add-new"})
 

@@ -2,7 +2,7 @@ defmodule PhoenixTrello.NewBoardTest do
   use PhoenixTrello.IntegrationCase
 
   setup do
-    user = create_user
+    user = create_user()
 
     {:ok, %{user: user}}
   end
@@ -29,9 +29,9 @@ defmodule PhoenixTrello.NewBoardTest do
 
     board = last_board(user)
 
-    assert page_title =~ board.name
-    assert page_source =~ "New board"
-    assert page_source =~ "Add new list..."
+    assert page_title() =~ board.name
+    assert page_source() =~ "New board"
+    assert page_source() =~ "Add new list..."
   end
 
   def last_board(user) do

@@ -9,8 +9,8 @@ defmodule PhoenixTrello.List do
     field :name, :string
     field :position, :integer
 
-    belongs_to :board, Board
-    has_many :cards, Card
+    belongs_to :board, PhoenixTrello.Board
+    has_many :cards, PhoenixTrello.Card
 
     timestamps()
   end

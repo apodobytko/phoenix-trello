@@ -21,7 +21,7 @@ defmodule PhoenixTrello.IntegrationCase do
       # The default endpoint for testing
       @endpoint PhoenixTrello.Endpoint
 
-      hound_session
+      hound_session()
     end
   end
 

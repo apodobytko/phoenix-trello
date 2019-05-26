@@ -10,10 +10,10 @@ defmodule PhoenixTrello.Board do
     field :name, :string
     field :slug, :string
 
-    belongs_to :user, User
-    has_many :lists, List
+    belongs_to :user, PhoenixTrello.User
+    has_many :lists, PhoenixTrello.List
     has_many :cards, through: [:lists, :cards]
-    has_many :user_boards, UserBoard
+    has_many :user_boards, PhoenixTrello.UserBoard
     has_many :members, through: [:user_boards, :user]
 
     timestamps()
