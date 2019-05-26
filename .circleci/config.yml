@@ -70,8 +70,14 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run: mix test --trace
-      - run: mix test --failed --trace
+      - run: 
+          name: Run tests
+          command: mix test --trace
+          halt_build_on_fail: false
+      - run:
+          name: Rerun failed tests
+          command: mix test --failed --trace
+          when: on_fail
 
       - store_artifacts:
           path: test-reports
