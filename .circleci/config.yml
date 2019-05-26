@@ -31,7 +31,9 @@ jobs:
           - npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
           - npm-cache-v1-{{ .Branch }}
           - npm-cache-v1-{{ arch }}
-      - run: mix local.hex --force && mix local.rebar --force && mix deps.get && npm install
+      - run: mix local.hex --force && mix local.rebar --force
+      - run: mix deps.get && mix deps.compile
+      - run: npm install
       - save_cache:
           key: dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
