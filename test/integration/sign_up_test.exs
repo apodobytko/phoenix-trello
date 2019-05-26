@@ -3,7 +3,7 @@ defmodule PhoenixTrello.SignUpTest do
 
   @tag :integration
   test "GET /sign_up" do
-    navigate_to "/sign_up"
+    navigate_to("/sign_up")
 
     assert page_title == "Sign up | Phoenix Trello"
     assert element_displayed?({:id, "sign_up_form"})
@@ -11,7 +11,7 @@ defmodule PhoenixTrello.SignUpTest do
 
   @tag :integration
   test "Siginig up with correct data" do
-    navigate_to "/sign_up"
+    navigate_to("/sign_up")
 
     assert element_displayed?({:id, "sign_up_form"})
 

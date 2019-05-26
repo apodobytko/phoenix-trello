@@ -7,11 +7,11 @@ defmodule PhoenixTrello.AddCardsTest do
     user = create_user
     board = create_board(user)
 
-    list = board
+    list =
+      board
       |> build_assoc(:lists)
       |> PhoenixTrello.List.changeset(%{name: "First list"})
-      |> Repo.insert!
-
+      |> Repo.insert!()
 
     {:ok, %{user: user, board: board, list: list}}
   end
@@ -20,7 +20,7 @@ defmodule PhoenixTrello.AddCardsTest do
   test "Clicking on a previously created list", %{user: user, board: board, list: list} do
     user_sign_in(%{user: user, board: board})
 
-    navigate_to "/boards/#{Board.slug_id(board)}"
+    navigate_to("/boards/#{Board.slug_id(board)}")
 
     assert element_displayed?({:css, ".view-container.boards.show"})
 
@@ -42,7 +42,8 @@ defmodule PhoenixTrello.AddCardsTest do
     |> find_within_element(:css, "button")
     |> click
 
-    card = board
+    card =
+      board
       |> last_card
 
     assert element_displayed?({:id, "card_#{card.id}"})
@@ -54,6 +55,6 @@ defmodule PhoenixTrello.AddCardsTest do
     |> Repo.get!(board.id)
     |> Repo.preload([:cards])
     |> Map.get(:cards)
-    |> List.last
+    |> List.last()
   end
 end

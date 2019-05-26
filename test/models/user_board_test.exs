@@ -16,7 +16,8 @@ defmodule PhoenixTrello.UserBoardTest do
   end
 
   test "changeset with valid attributes", %{user: user, board: board} do
-    attributes = @valid_attrs
+    attributes =
+      @valid_attrs
       |> Map.put(:user_id, user.id)
       |> Map.put(:board_id, board.id)
 

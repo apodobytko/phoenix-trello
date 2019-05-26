@@ -16,8 +16,9 @@ defmodule PhoenixTrello.ShowBoardTest do
 
     assert page_source =~ board.name
 
-    board_id = board
-      |> Board.slug_id
+    board_id =
+      board
+      |> Board.slug_id()
 
     click({:id, board_id})
 

@@ -24,7 +24,6 @@ defmodule PhoenixTrello.ChannelCase do
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
-
       # The default endpoint for testing
       @endpoint PhoenixTrello.Endpoint
     end

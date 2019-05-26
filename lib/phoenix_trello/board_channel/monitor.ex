@@ -12,6 +12,7 @@ defmodule PhoenixTrello.BoardChannel.Monitor do
     case GenServer.whereis(ref(board_id)) do
       nil ->
         Supervisor.start_child(PhoenixTrello.BoardChannel.Supervisor, [board_id])
+
       _board ->
         {:error, :board_already_exists}
     end
@@ -22,29 +23,30 @@ defmodule PhoenixTrello.BoardChannel.Monitor do
   end
 
   def user_joined(board_id, user) do
-   try_call board_id, {:user_joined, user}
+    try_call(board_id, {:user_joined, user})
   end
 
   def users_in_board(board_id) do
-   try_call board_id, {:users_in_board}
+    try_call(board_id, {:users_in_board})
   end
 
   def user_left(board_id, user) do
-    try_call board_id, {:user_left, user}
+    try_call(board_id, {:user_left, user})
   end
 
   #####
   # GenServer implementation
 
   def handle_call({:user_joined, user}, _from, users) do
-    users = [user] ++ users
-      |> Enum.uniq
+    users =
+      ([user] ++ users)
+      |> Enum.uniq()
 
     {:reply, users, users}
   end
 
   def handle_call({:users_in_board}, _from, users) do
-    { :reply, users, users }
+    {:reply, users, users}
   end
 
   def handle_call({:user_left, user}, _from, users) do
@@ -60,6 +62,7 @@ defmodule PhoenixTrello.BoardChannel.Monitor do
     case GenServer.whereis(ref(board_id)) do
       nil ->
         {:error, :invalid_board}
+
       board ->
         GenServer.call(board, call_function)
     end

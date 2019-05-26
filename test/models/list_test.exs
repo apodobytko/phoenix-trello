@@ -30,17 +30,18 @@ defmodule PhoenixTrello.ListTest do
   test "existing lists for the same board", %{board: board} do
     count = 3
 
-    for i <- 1..(count-1) do
+    for i <- 1..(count - 1) do
       board
       |> build_assoc(:lists)
       |> List.changeset(%{name: "List #{i}"})
-      |> Repo.insert
+      |> Repo.insert()
     end
 
-    {:ok, last_list} = board
+    {:ok, last_list} =
+      board
       |> build_assoc(:lists)
       |> List.changeset(%{name: "Last"})
-      |> Repo.insert
+      |> Repo.insert()
 
     assert last_list.position == 1024 * count
   end

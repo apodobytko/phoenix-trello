@@ -7,19 +7,19 @@ defmodule PhoenixTrello.AddListsTest do
     user = create_user
     board = create_board(user)
 
-    {:ok, %{user: user, board: board }}
+    {:ok, %{user: user, board: board}}
   end
 
   @tag :integration
   test "Clicking on previously created board", %{user: user, board: board} do
     user_sign_in(%{user: user, board: board})
 
-    navigate_to "/boards/#{Board.slug_id(board)}"
+    navigate_to("/boards/#{Board.slug_id(board)}")
 
     assert element_displayed?({:css, ".view-container.boards.show"})
     assert page_source =~ "Add new list..."
 
-    click {:css, ".list.add-new"}
+    click({:css, ".list.add-new"})
 
     assert element_displayed?({:css, ".list.form"})
 
@@ -33,7 +33,8 @@ defmodule PhoenixTrello.AddListsTest do
     |> find_within_element(:css, "button")
     |> click
 
-    list = user
+    list =
+      user
       |> last_list
 
     assert element_displayed?({:id, "list_#{list.id}"})
@@ -41,11 +42,11 @@ defmodule PhoenixTrello.AddListsTest do
 
   defp last_list(user) do
     user
-    |> Repo.preload([boards: [:lists]])
+    |> Repo.preload(boards: [:lists])
     |> Map.get(:boards)
-    |> List.last
+    |> List.last()
     |> Repo.preload(:lists)
     |> Map.get(:lists)
-    |> List.last
+    |> List.last()
   end
 end

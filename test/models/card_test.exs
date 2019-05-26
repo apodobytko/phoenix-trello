@@ -19,17 +19,18 @@ defmodule PhoenixTrello.CardTest do
   test "existing cards for the same list", %{list: list} do
     count = 3
 
-    for i <- 1..(count-1) do
+    for i <- 1..(count - 1) do
       list
       |> build_assoc(:cards)
       |> Card.changeset(%{name: "Card #{i}"})
-      |> Repo.insert
+      |> Repo.insert()
     end
 
-    {:ok, last_card} = list
+    {:ok, last_card} =
+      list
       |> build_assoc(:cards)
       |> Card.changeset(%{name: "Last"})
-      |> Repo.insert
+      |> Repo.insert()
 
     assert last_card.position == 1024 * count
   end
