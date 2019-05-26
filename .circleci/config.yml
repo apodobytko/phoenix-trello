@@ -18,7 +18,7 @@ jobs:
       - run:
           name: Start chromedriver
           command: |
-            chromedriver --port=4444 --url-base=wd/hub --verbose > test-reports/chromedriver.log
+            chromedriver --port=4444 --url-base=wd/hub
           background: true
 
       - run: mix local.hex --force
