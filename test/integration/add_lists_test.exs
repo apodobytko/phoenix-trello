@@ -21,7 +21,7 @@ defmodule PhoenixTrello.AddListsTest do
 
     click({:css, ".list.add-new"})
 
-    assert element_displayed?({:css, ".list.form"})
+    assert find_element(:css, ".list.form") |> element_displayed?()
 
     new_list_form = find_element(:id, "new_list_form")
 

@@ -46,7 +46,7 @@ defmodule PhoenixTrello.AddCardsTest do
       board
       |> last_card
 
-    assert element_displayed?({:id, "card_#{card.id}"})
+    assert find_element(:id, "card_#{card.id}") |> element_displayed?()
     assert page_source() =~ card.name
   end
 
