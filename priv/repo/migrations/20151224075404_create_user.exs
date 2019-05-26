@@ -8,7 +8,7 @@ defmodule PhoenixTrello.Repo.Migrations.CreateUser do
       add :email, :string, null: false
       add :crypted_password, :string, null: false
 
-      timestamps
+      timestamps()
     end
 
     create unique_index(:users, [:email])

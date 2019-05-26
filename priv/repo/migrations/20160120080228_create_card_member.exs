@@ -6,7 +6,7 @@ defmodule PhoenixTrello.Repo.Migrations.CreateCardMember do
       add :card_id, references(:cards, on_delete: :delete_all), null: false
       add :user_board_id, references(:user_boards, on_delete: :delete_all), null: false
 
-      timestamps
+      timestamps()
     end
 
     create index(:card_members, [:card_id])

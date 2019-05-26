@@ -7,7 +7,7 @@ defmodule PhoenixTrello.Repo.Migrations.CreateCard do
       add :position, :integer, default: 0
       add :list_id, references(:lists, on_delete: :delete_all), null: false
 
-      timestamps
+      timestamps()
     end
 
     create index(:cards, [:list_id])

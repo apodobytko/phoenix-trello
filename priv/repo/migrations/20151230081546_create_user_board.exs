@@ -6,7 +6,7 @@ defmodule PhoenixTrello.Repo.Migrations.CreateUserBoard do
       add :user_id, references(:users, on_delete: :delete_all), null: false
       add :board_id, references(:boards, on_delete: :delete_all), null: false
 
-      timestamps
+      timestamps()
     end
 
     create index(:user_boards, [:user_id])

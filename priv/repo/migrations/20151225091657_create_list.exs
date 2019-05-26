@@ -7,7 +7,7 @@ defmodule PhoenixTrello.Repo.Migrations.CreateList do
       add :position, :integer, defaul: 0
       add :board_id, references(:boards, on_delete: :delete_all)
 
-      timestamps
+      timestamps()
     end
 
     create index(:lists, [:board_id])

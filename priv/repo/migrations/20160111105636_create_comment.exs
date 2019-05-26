@@ -7,9 +7,9 @@ defmodule PhoenixTrello.Repo.Migrations.CreateComment do
       add :user_id, references(:users, on_delete: :delete_all)
       add :card_id, references(:cards, on_delete: :delete_all)
 
-      timestamps
+      timestamps()
     end
-    
+
     create index(:comments, [:user_id])
     create index(:comments, [:card_id])
   end
