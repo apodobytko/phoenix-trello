@@ -75,6 +75,7 @@ jobs:
           command: |
             set +e
             mix test --trace
+            exit 0
       - run:
           name: Rerun failed tests
           command: mix test --failed --trace
