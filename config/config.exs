@@ -39,5 +39,4 @@ config :guardian, Guardian,
   verify_issuer: true,
   serializer: PhoenixTrello.GuardianSerializer
 
-# Start Hound for PhantomJs
-config :hound, driver: "chrome_driver"
+config :hound, driver: "selenium", browser: "chrome"
