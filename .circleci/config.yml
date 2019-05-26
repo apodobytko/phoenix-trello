@@ -52,6 +52,7 @@ jobs:
           paths: "node_modules"
       
       - run: ./node_modules/.bin/webpack
+      - run: mix compile --force --warnings-as-errors
       - run: mix test --trace
 
       - store_artifacts:
