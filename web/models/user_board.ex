@@ -2,13 +2,12 @@ defmodule PhoenixTrello.UserBoard do
   use PhoenixTrello.Web, :model
 
   alias __MODULE__
-  alias PhoenixTrello.{User, Board}
 
   schema "user_boards" do
     belongs_to :user, User
     belongs_to :board, Board
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(user_id board_id)

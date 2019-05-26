@@ -2,7 +2,7 @@ defmodule PhoenixTrello.Board do
   use PhoenixTrello.Web, :model
 
   alias __MODULE__
-  alias PhoenixTrello.{Repo, Permalink, List, Comment, Card, UserBoard, User}
+  alias PhoenixTrello.{Permalink, List, Comment, Card}
 
   @primary_key {:id, Permalink, autogenerate: true}
 
@@ -16,7 +16,7 @@ defmodule PhoenixTrello.Board do
     has_many :user_boards, UserBoard
     has_many :members, through: [:user_boards, :user]
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(name user_id)

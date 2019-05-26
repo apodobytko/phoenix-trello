@@ -1,7 +1,7 @@
 defmodule PhoenixTrello.Card do
   use PhoenixTrello.Web, :model
 
-  alias PhoenixTrello.{Repo, List, Card, Comment, CardMember}
+  alias PhoenixTrello.{Repo, Card, Comment}
 
   @derive {Poison.Encoder, only: [:id, :list_id, :name, :description, :position, :comments, :tags, :members]}
 
@@ -16,7 +16,7 @@ defmodule PhoenixTrello.Card do
     has_many :card_members, CardMember
     has_many :members, through: [:card_members, :user]
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(name list_id)

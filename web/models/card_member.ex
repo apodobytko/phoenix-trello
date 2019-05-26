@@ -8,7 +8,7 @@ defmodule PhoenixTrello.CardMember do
     belongs_to :user_board, PhoenixTrello.UserBoard
     has_one :user, through: [:user_board, :user]
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(card_id user_board_id)

@@ -9,7 +9,7 @@ defmodule PhoenixTrello.Comment do
     belongs_to :user, PhoenixTrello.User
     belongs_to :card, PhoenixTrello.Card
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(user_id card_id text)

@@ -14,7 +14,7 @@ defmodule PhoenixTrello.BoardChannel do
 
     Monitor.create(board_id)
 
-    send(self, {:after_join, Monitor.user_joined(board_id, current_user.id)})
+    send(self(), {:after_join, Monitor.user_joined(board_id, current_user.id)})
 
     {:ok, %{board: board}, assign(socket, :board, board)}
   end

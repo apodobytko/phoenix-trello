@@ -1,7 +1,7 @@
 defmodule PhoenixTrello.List do
   use PhoenixTrello.Web, :model
 
-  alias PhoenixTrello.{Board, Repo, List, Card}
+  alias PhoenixTrello.{Repo, List}
 
   @derive {Poison.Encoder, only: [:id, :board_id, :name, :position, :cards]}
 
@@ -12,7 +12,7 @@ defmodule PhoenixTrello.List do
     belongs_to :board, Board
     has_many :cards, Card
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(name)

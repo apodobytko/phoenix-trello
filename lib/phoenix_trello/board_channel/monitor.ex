@@ -5,6 +5,10 @@ defmodule PhoenixTrello.BoardChannel.Monitor do
 
   use GenServer
 
+  def init(args) do
+    {:ok, args}
+  end
+
   #####
   # External API
 
