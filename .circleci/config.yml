@@ -33,9 +33,7 @@ jobs:
           keys:
             - build-cache-v1-{{ .Branch }}
             - build-cache-v1
-      - run: mix deps.get
-      - run: mix deps.compile comeonin
-      - run: mix compile --warnings-as-errors
+      - run: mix do deps.get, compile --warnings-as-errors
       - save_cache:
           key: dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
