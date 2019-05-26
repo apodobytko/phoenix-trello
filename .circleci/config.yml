@@ -26,7 +26,7 @@ jobs:
       - run: mix do deps.get, deps.compile, compile, ecto.migrate
       - run: npm install
       - run: ./node_modules/.bin/webpack
-      - run: mix phx.digest
+      - run: mix phoenix.digest
       - run: mix test
 
       - store_artifacts:
