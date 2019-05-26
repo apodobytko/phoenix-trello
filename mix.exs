@@ -44,20 +44,21 @@ defmodule PhoenixTrello.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.2.1"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix_ecto, "~> 3.0.1"},
-      {:postgrex, "~> 0.12", override: true},
-      {:phoenix_html, "~> 2.6.2"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:cowboy, "~> 1.0"},
       {:comeonin, "~> 2.5.3"},
-      {:guardian, "~> 0.13.0"},
+      {:cowboy, "~> 1.0"},
       {:credo, "~> 0.4.11", only: [:dev, :test]},
       {:ex_machina, "~> 1.0.2"},
       {:exactor, "~> 2.2.0"},
+      {:gettext, "~> 0.16.0"},
+      {:guardian, "~> 0.13.0"},
       {:hound, "~> 1.0.2"},
-      {:mix_test_watch, "~> 0.2", only: :dev}
+      {:mix_test_watch, "~> 0.2", only: :dev},
+      {:phoenix_ecto, "~> 3.0.1"},
+      {:phoenix_html, "~> 2.6.2"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix, "~> 1.2.1"},
+      {:postgrex, "~> 0.12", override: true},
     ]
   end
 
