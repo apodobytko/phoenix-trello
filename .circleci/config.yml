@@ -21,54 +21,37 @@ jobs:
             chromedriver --port=4444 --url-base=wd/hub
           background: true
         
-      - run: mix local.hex --force
-      - run: mix local.rebar --force
-
       - restore_cache:
           keys:
-            - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
-            - v1-mix-cache-{{ .Branch }}
-            - v1-mix-cache
+          - dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
+          - dependency-cache-v1-{{ .Branch }}
+          - dependency-cache-v1-{{ arch }}
       - restore_cache:
           keys:
-            - v1-build-cache-{{ .Branch }}
-            - v1-build-cache
-      - restore_cache:
-          keys:
-            - v1-npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-npm-cache-{{ .Branch }}
-            - v1-npm-cache
-      
-      - run: mix do deps.get, compile
-      - run: npm install
-      
+          - npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          - npm-cache-v1-{{ .Branch }}
+          - npm-cache-v1-{{ arch }}
+      - run: mix local.hex --force && mix local.rebar --force && mix deps.get && npm install
       - save_cache:
-          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          key: dependency-cache-v1-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
       - save_cache:
-          key: v1-mix-cache-{{ .Branch }}
+          key: dependency-cache-v1-{{ .Branch }}
           paths: "deps"
       - save_cache:
-          key: v1-mix-cache
+          key: dependency-cache-v1-{{ arch }}
           paths: "deps"
       - save_cache:
-          key: v1-build-cache-{{ .Branch }}
-          paths: "_build"
-      - save_cache:
-          key: v1-build-cache
-          paths: "_build"
-      - save_cache:
-          key: v1-npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: npm-cache-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths: "node_modules"
       - save_cache:
-          key: v1-npm-cache-{{ .Branch }}
+          key: npm-cache-v1-{{ .Branch }}
           paths: "node_modules"
       - save_cache:
-          key: v1-npm-cache
+          key: npm-cache-v1-{{ arch }}
           paths: "node_modules"
       
       - run: ./node_modules/.bin/webpack
-      - run: mix phoenix.digest
       - run: mix test --trace
 
       - store_artifacts:
