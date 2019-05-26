@@ -1,0 +1,40 @@
+version: 2
+jobs:
+  build:
+    parallelism: 1
+    docker:
+      - image: circleci/elixir:1.7.4-node-browsers
+        environment:
+          MIX_ENV: test
+      - image: circleci/postgres:9.5.11-alpine
+        # environment:
+          # POSTGRES_USER: ubuntu
+          # POSTGRES_DB: circle_test
+          # POSTGRES_PASSWORD:
+
+    steps:
+      - checkout
+      - run: mkdir test-reports
+      - run:
+          name: Start chromedriver
+          command: |
+            chromedriver --port=4444 --url-base=wd/hub
+          background: true
+        
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+      - run: mix do deps.get, deps.compile, compile, ecto.migrate
+      - run: npm install
+      - run: ./node_modules/.bin/webpack
+      - run: mix phx.digest
+      - run: mix test
+
+      - store_artifacts:
+          path: test-reports
+
+      - save_cache:
+          key: dependency-cache
+          paths:
+            - node_modules
+            - _build
+            - deps
