@@ -23,18 +23,53 @@ jobs:
         
       - run: mix local.hex --force
       - run: mix local.rebar --force
-      - run: mix do deps.get, deps.compile, compile, ecto.migrate
+
+      - restore_cache:
+          keys:
+            - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+            - v1-mix-cache-{{ .Branch }}
+            - v1-mix-cache
+      - restore_cache:
+          keys:
+            - v1-build-cache-{{ .Branch }}
+            - v1-build-cache
+      - restore_cache:
+          keys:
+            - v1-npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-npm-cache-{{ .Branch }}
+            - v1-npm-cache
+      
+      - run: mix do deps.get, compile
       - run: npm install
+      
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
+          paths: "deps"
+      - save_cache:
+          key: v1-mix-cache-{{ .Branch }}
+          paths: "deps"
+      - save_cache:
+          key: v1-mix-cache
+          paths: "deps"
+      - save_cache:
+          key: v1-build-cache-{{ .Branch }}
+          paths: "_build"
+      - save_cache:
+          key: v1-build-cache
+          paths: "_build"
+      - save_cache:
+          key: v1-npm-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths: "node_modules"
+      - save_cache:
+          key: v1-npm-cache-{{ .Branch }}
+          paths: "node_modules"
+      - save_cache:
+          key: v1-npm-cache
+          paths: "node_modules"
+      
       - run: ./node_modules/.bin/webpack
       - run: mix phoenix.digest
       - run: mix test --trace
 
       - store_artifacts:
           path: test-reports
-
-      - save_cache:
-          key: dependency-cache
-          paths:
-            - node_modules
-            - _build
-            - deps
