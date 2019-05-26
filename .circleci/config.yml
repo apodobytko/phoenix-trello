@@ -6,7 +6,7 @@ jobs:
       - image: circleci/elixir:1.7.4-node-browsers
         environment:
           MIX_ENV: test
-      - image: circleci/postgres:9.5.11-alpine
+      - image: circleci/postgres:9.6.9-alpine-ram
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: phoenix_trello_test
