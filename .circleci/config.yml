@@ -72,12 +72,12 @@ jobs:
 
       - run: 
           name: Run tests
-          command: mix test --trace
-          halt_build_on_fail: false
+          command: |
+            set +e
+            mix test --trace
       - run:
           name: Rerun failed tests
           command: mix test --failed --trace
-          when: on_fail
 
       - store_artifacts:
           path: test-reports
