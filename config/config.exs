@@ -41,4 +41,4 @@ config :guardian, Guardian,
 config :hound,
   driver: "selenium",
   browser: "chrome",
-  retry_time: 500
+  retry_time: 1000
