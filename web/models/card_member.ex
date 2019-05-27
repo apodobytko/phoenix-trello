@@ -11,7 +11,7 @@ defmodule PhoenixTrello.CardMember do
     timestamps()
   end
 
-  @required_fields ~w(card_id user_board_id)
+  @required_fields ~w(card_id user_board_id)a
   @optional_fields ~w()
 
   @doc """
@@ -22,7 +22,8 @@ defmodule PhoenixTrello.CardMember do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> unique_constraint(:user_board_id, name: :card_members_card_id_user_board_id_index)
   end
 

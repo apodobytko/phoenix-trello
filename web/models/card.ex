@@ -19,8 +19,8 @@ defmodule PhoenixTrello.Card do
     timestamps()
   end
 
-  @required_fields ~w(name list_id)
-  @optional_fields ~w(description position tags)
+  @required_fields ~w(name list_id)a
+  @optional_fields ~w(description position tags)a
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -30,13 +30,15 @@ defmodule PhoenixTrello.Card do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> calculate_position()
   end
 
   def update_changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 
   defp calculate_position(current_changeset) do

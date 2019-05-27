@@ -22,15 +22,15 @@ defmodule PhoenixTrello.Mixfile do
     [
       mod: {PhoenixTrello, []},
       applications: [
-        :phoenix,
-        :phoenix_pubsub,
-        :phoenix_html,
+        :comeonin,
         :cowboy,
+        :ecto_sql,
         :logger,
         :phoenix_ecto,
-        :postgrex,
-        :comeonin,
-        :ex_machina
+        :phoenix_html,
+        :phoenix_pubsub,
+        :phoenix,
+        :postgrex
       ]
     ]
   end
@@ -47,18 +47,20 @@ defmodule PhoenixTrello.Mixfile do
       {:comeonin, "~> 2.5.3"},
       {:cowboy, "~> 1.0"},
       {:credo, "~> 0.4.11", only: [:dev, :test]},
-      {:ex_machina, "~> 1.0.2"},
+      {:ecto_sql, "~> 3.0"},
+      {:ex_machina, "~> 2.2", only: :test},
       {:exactor, "~> 2.2.0"},
       {:gettext, "~> 0.16.0"},
-      {:guardian, "~> 0.13.0"},
+      {:guardian, "0.14.5"},
       {:hound, "~> 1.0.2"},
       {:mix_test_watch, "~> 0.2", only: :dev},
-      {:phoenix_ecto, "~> 3.0.1"},
-      {:phoenix_html, "~> 2.6.2"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_ecto, "~> 4.0"},
+      {:phoenix_html, "~> 2.3"},
+      {:phoenix_live_reload, "~> 1.0.5", only: :dev},
       {:phoenix_pubsub, "~> 1.0"},
-      {:phoenix, "~> 1.2.1"},
-      {:postgrex, "~> 0.12", override: true},
+      {:phoenix, "~> 1.3.0"},
+      {:plug_cowboy, "~> 1.0"},
+      {:postgrex, "~> 0.14.1"}
     ]
   end
 

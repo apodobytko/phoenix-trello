@@ -15,8 +15,8 @@ defmodule PhoenixTrello.List do
     timestamps()
   end
 
-  @required_fields ~w(name)
-  @optional_fields ~w(position)
+  @required_fields ~w(name)a
+  @optional_fields ~w(position)a
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -26,13 +26,15 @@ defmodule PhoenixTrello.List do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> calculate_position()
   end
 
   def update_changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 
   defp calculate_position(current_changeset) do

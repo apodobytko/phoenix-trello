@@ -19,8 +19,8 @@ defmodule PhoenixTrello.Board do
     timestamps()
   end
 
-  @required_fields ~w(name user_id)
-  @optional_fields ~w(slug)
+  @required_fields ~w(name user_id)a
+  @optional_fields ~w(slug)a
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -30,7 +30,8 @@ defmodule PhoenixTrello.Board do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> slugify_name()
   end
 

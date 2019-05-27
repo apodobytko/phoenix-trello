@@ -12,7 +12,7 @@ defmodule PhoenixTrello.Comment do
     timestamps()
   end
 
-  @required_fields ~w(user_id card_id text)
+  @required_fields ~w(user_id card_id text)a
   @optional_fields ~w()
 
   @doc """
@@ -23,6 +23,7 @@ defmodule PhoenixTrello.Comment do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
   end
 end

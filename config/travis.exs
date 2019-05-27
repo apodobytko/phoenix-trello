@@ -11,7 +11,6 @@ config :logger, level: :warn
 
 # Configure your database
 config :phoenix_trello, PhoenixTrello.Repo,
-  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "",
   database: "phoenix_trello_test",

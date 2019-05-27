@@ -21,7 +21,6 @@ defmodule PhoenixTrello.ChannelCase do
       use Phoenix.ChannelTest
 
       alias PhoenixTrello.Repo
-      import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       # The default endpoint for testing

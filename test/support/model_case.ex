@@ -18,7 +18,6 @@ defmodule PhoenixTrello.ModelCase do
     quote do
       alias PhoenixTrello.Repo
       import Ecto, only: [build_assoc: 2]
-      import Ecto.Model, except: [build: 2]
       import Ecto.Query, only: [from: 2]
       import PhoenixTrello.ModelCase
       import PhoenixTrello.Factory
