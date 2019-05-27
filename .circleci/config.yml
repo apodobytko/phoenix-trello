@@ -4,6 +4,8 @@ jobs:
     parallelism: 1
     docker:
       - image: circleci/elixir:1.7.4-node-browsers
+        environment:
+          MIX_ENV: test
       - image: circleci/postgres:9.5.11-alpine
 
     steps:
