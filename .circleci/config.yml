@@ -14,8 +14,8 @@ jobs:
 
     steps:
       - checkout
-      - run: cp .env.test.example .env.test
-      - run: export $(egrep -v '^#' .env.test | xargs)
+      # - run: cp .env.test.example .env.test
+      # - run: export $(egrep -v '^#' .env.test | xargs)
       - run: mkdir test-reports
       - run:
           name: Start chromedriver
