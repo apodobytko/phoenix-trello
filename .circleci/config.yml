@@ -7,15 +7,11 @@ jobs:
         environment:
           MIX_ENV: test
       - image: circleci/postgres:9.6.9-alpine
-        # environment:
-          # POSTGRES_USER: postgres
-          # POSTGRES_DB: phoenix_trello_test
-          # POSTGRES_PASSWORD: postgres
 
     steps:
       - checkout
-      # - run: cp .env.test.example .env.test
-      # - run: export $(egrep -v '^#' .env.test | xargs)
+      - run: cp .env.test.example .env.test
+      - run: export $(egrep -v '^#' .env.test | xargs)
       - run: mkdir test-reports
       - run:
           name: Start chromedriver
