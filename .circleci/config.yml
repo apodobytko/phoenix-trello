@@ -11,7 +11,6 @@ jobs:
     steps:
       - checkout
       - run: cp .env.test.example .env.test
-      - run: export $(egrep -v '^#' .env.test | xargs)
       - run: mkdir test-reports
       - run:
           name: Start chromedriver
@@ -72,11 +71,11 @@ jobs:
           name: Run tests
           command: |
             set +e
-            mix test --trace
+            env $(cat .env.test | xargs) mix test --trace
             exit 0
       - run:
           name: Rerun failed tests
-          command: mix test --failed --trace
+          command: env $(cat .env.test | xargs) mix test --failed --trace
 
       - store_artifacts:
           path: test-reports
