@@ -15,7 +15,7 @@ config :phoenix_trello, PhoenixTrello.Repo,
   username: "postgres",
   password: "postgres",
   database: "phoenix_trello_test",
-  hostname: if(System.get_env("CI"), do: "postgres", else: "localhost"),
+  hostname: if(System.get_env("CI"), do: "postgres", else: "localhost")
 
 # Guardian configuration
 config :guardian, Guardian,
