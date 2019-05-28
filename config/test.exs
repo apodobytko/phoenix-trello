@@ -12,6 +12,10 @@ config :logger, level: :warn
 # Configure your database
 config :phoenix_trello, PhoenixTrello.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
+  username: "postgres",
+  password: "postgres",
+  database: "phoenix_trello_test",
+  hostname: if(System.get_env("CI"), do: "postgres", else: "localhost"),
 
 # Guardian configuration
 config :guardian, Guardian,

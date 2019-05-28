@@ -22,6 +22,3 @@ erl_crash.dump
 *.log
 priv/static
 /.elixir_ls
-
-.env
-.env.test
