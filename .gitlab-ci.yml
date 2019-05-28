@@ -11,6 +11,7 @@ variables:
   MIX_ENV: test
 
 before_script:
+  - cp .env.test.example .env.test
   - chromedriver --port=4444 --url-base=wd/hub &
   - mix local.hex --force && mix local.rebar --force
   - mix do deps.get --only test, deps.compile, compile --warnings-as-errors
@@ -18,5 +19,5 @@ before_script:
 
 mix:
   script:
-  - mix test --trace
-  - mix test --failed --trace
+  - env $(cat .env.test | xargs) mix test --trace
+  - env $(cat .env.test | xargs) mix test --failed --trace
