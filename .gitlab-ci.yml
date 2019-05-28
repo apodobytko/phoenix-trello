@@ -1,0 +1,22 @@
+image: circleci/elixir:1.7.4-node-browsers
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: phoenix_trello_test
+  POSTGRES_HOST: localhost
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  MIX_ENV: test
+
+before_script:
+  - chromedriver --port=4444 --url-base=wd/hub &
+  - mix local.hex --force && mix local.rebar --force
+  - mix do deps.get --only test, deps.compile, compile --warnings-as-errors
+  - npm install && node_modules/.bin/webpack --mode production
+
+mix:
+  script:
+  - mix test --trace
+  - mix test --failed --trace
