@@ -1,11 +1,11 @@
 image: circleci/elixir:1.7.4-node-browsers
 
 services:
-  - postgres:latest
+  - postgres:9.5.11
 
 variables:
   POSTGRES_DB: phoenix_trello_test
-  POSTGRES_HOST: localhost
+  POSTGRES_HOST: postgres
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
   MIX_ENV: test
