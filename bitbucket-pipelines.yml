@@ -1,0 +1,22 @@
+image: bitwalker/alpine-elixir-phoenix:1.7.3
+pipelines:
+  default:
+   - step:
+      name: Build and test
+      script:
+        - apk add chromium chromium-chromedriver
+        - chromedriver --port=4444 --url-base=wd/hub &
+        - MIX_ENV=test mix deps.get
+        - MIX_ENV=test mix ecto.create
+        - MIX_ENV=test mix ecto.migrate
+        - mix test
+      services: 
+        - postgres
+
+definitions: 
+  caches:
+    deps: deps
+    build: _build
+  services: 
+    postgres: 
+      image: postgres:9.6
