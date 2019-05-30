@@ -5,11 +5,11 @@ pipelines:
       name: Build and test
       script:
         - apk add chromium chromium-chromedriver
+        - apk add nodejs-current
         - chromedriver --port=4444 --url-base=wd/hub &
         - mix local.hex --force && mix local.rebar --force
-        - MIX_ENV=test mix deps.get
-        - MIX_ENV=test mix ecto.create
-        - MIX_ENV=test mix ecto.migrate
+        - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
+        - npm install && node_modules/.bin/webpack --mode production
         - mix test
       services: 
         - postgres
