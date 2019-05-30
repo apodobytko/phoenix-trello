@@ -6,6 +6,7 @@ pipelines:
       script:
         - apk add chromium chromium-chromedriver
         - chromedriver --port=4444 --url-base=wd/hub &
+        - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix deps.get
         - MIX_ENV=test mix ecto.create
         - MIX_ENV=test mix ecto.migrate
