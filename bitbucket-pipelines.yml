@@ -6,6 +6,7 @@ pipelines:
       script:
         - apk add chromium chromium-chromedriver
         - apk add nodejs-current
+        - apk add python2
         - chromedriver --port=4444 --url-base=wd/hub &
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
