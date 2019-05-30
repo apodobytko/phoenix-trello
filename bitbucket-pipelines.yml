@@ -12,6 +12,7 @@ pipelines:
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
         - npm install && node_modules/.bin/webpack --mode production
+        - export DISPLAY=:99 && Xvfb :99 -screen 0 1280x1024x24 &
         - mix test --trace
       services: 
         - postgres
