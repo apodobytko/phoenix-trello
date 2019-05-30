@@ -1,4 +1,4 @@
-image: bitwalker/alpine-elixir-phoenix:1.7.4
+image: bitwalker/alpine-elixir-phoenix:1.7.3
 pipelines:
   default:
    - step:
