@@ -1,12 +1,14 @@
-image: bitwalker/alpine-elixir-phoenix:1.7.3
+image: circleci/elixir:1.7.4-node-browsers
 pipelines:
   default:
    - step:
       name: Build and test
+      caches:
+        - deps
+        - build
+        - node
       script:
         - apk add chromium chromium-chromedriver
-        - apk add nodejs-current
-        - apk add python2
         - chromedriver --port=4444 --url-base=wd/hub &
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
