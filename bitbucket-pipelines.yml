@@ -8,9 +8,10 @@ pipelines:
         - build
         - node
       script:
-        - apk --update add build-base chromium chromium-chromedriver xvfb python2 nodejs npm curl
+        - echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && apk update && apk upgrade
+        - apk add build-base chromium chromium-chromedriver xvfb python2 nodejs npm curl
         - chromedriver --port=4444 --url-base=wd/hub &
-        - wait 3 && curl localhost:4444/wd/hub/status
+        - sleep 3 && curl localhost:4444/wd/hub/status
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
         - npm install && node_modules/.bin/webpack --mode production
