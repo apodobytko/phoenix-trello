@@ -1,4 +1,4 @@
-image: bitwalker/alpine-elixir:1.7.4
+image: circleci/elixir:1.7.4-node-browsers
 pipelines:
   default:
    - step:
@@ -8,7 +8,6 @@ pipelines:
         - build
         - node
       script:
-        - apk add chromium chromium-chromedriver xvfb python2 nodejs-current
         - chromedriver --port=4444 --url-base=wd/hub &
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
