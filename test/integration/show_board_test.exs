@@ -14,7 +14,7 @@ defmodule PhoenixTrello.ShowBoardTest do
   test "Clicking on previously created board", %{user: user, board: board} do
     user_sign_in(%{user: user, board: board})
 
-    assert page_source() =~ board.name
+    assert page_source() =~ "X" <> board.name
 
     board_id =
       board
