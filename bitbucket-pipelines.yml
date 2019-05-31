@@ -11,8 +11,8 @@ pipelines:
         - apk update && apk upgrade
         - echo @latest-stable http://nl.alpinelinux.org/alpine/latest-stable/community >> /etc/apk/repositories
         - echo @latest-stable http://nl.alpinelinux.org/alpine/latest-stable/main >> /etc/apk/repositories
-        - apk add --no-cache chromium@latest-stable chromium-chromedriver@latest-stable harfbuzz@latest-stable nss@latest-stable
-        - apk add build-base python2 nodejs npm curl
+        - apk add --no-cache chromium@latest-stable chromium-chromedriver@latest-stable harfbuzz@latest-stable nss@latest-stable nodejs@latest-stable npm@latest-stable
+        - apk add build-base python2 curl
         - chromedriver --port=4444 --url-base=wd/hub &
         - sleep 3 && curl localhost:4444/wd/hub/status
         - mix local.hex --force && mix local.rebar --force
