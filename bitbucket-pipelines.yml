@@ -6,23 +6,11 @@ pipelines:
       caches:
         - deps
         - build
-        - node
       script:
-        - apk update && apk upgrade
-        - echo @latest-stable http://nl.alpinelinux.org/alpine/latest-stable/community >> /etc/apk/repositories
-        - echo @latest-stable http://nl.alpinelinux.org/alpine/latest-stable/main >> /etc/apk/repositories
-        - apk add --no-cache chromium@latest-stable chromium-chromedriver@latest-stable harfbuzz@latest-stable nss@latest-stable nodejs@latest-stable npm@latest-stable
-        - apk add build-base python2 curl
-        - chromedriver --port=4444 --url-base=wd/hub &
-        - sleep 3 && curl localhost:4444/wd/hub/status
+        - apk add build-base
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
-        - npm install && npm rebuild node-sass && node_modules/.bin/webpack --mode production
-        - |
-          set +e
-          mix test --trace
-          echo $?
-        - mix test --failed --trace
+        - mix test --exclude integration --trace
       services: 
         - postgres
 

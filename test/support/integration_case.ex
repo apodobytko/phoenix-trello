@@ -20,18 +20,7 @@ defmodule PhoenixTrello.IntegrationCase do
       # The default endpoint for testing
       @endpoint PhoenixTrello.Endpoint
 
-      hound_session(
-        additional_capabilities: %{
-          chromeOptions: %{
-            "args" => [
-              "--user-agent=#{Hound.Browser.user_agent(:chrome)}",
-              "--headless",
-              "--disable-gpu",
-              "--no-sandbox"
-            ]
-          }
-        }
-      )
+      hound_session()
     end
   end
 
