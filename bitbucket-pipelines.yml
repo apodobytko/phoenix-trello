@@ -17,7 +17,7 @@ pipelines:
         - sleep 3 && curl localhost:4444/wd/hub/status
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
-        - npm install && node_modules/.bin/webpack --mode production
+        - npm install && npm rebuild node-sass && node_modules/.bin/webpack --mode production
         - |
           set +e
           mix test --trace
