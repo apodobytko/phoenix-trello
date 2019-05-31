@@ -8,7 +8,7 @@ pipelines:
         - build
         - node
       script:
-        - apk add build-base chromium-chromedriver xvfb python2 nodejs npm curl
+        - apk --update add build-base chromium-chromedriver xvfb python2 nodejs npm curl
         - chromedriver --port=4444 --url-base=wd/hub &
         - curl localhost:4444/wd/hub/status
         - mix local.hex --force && mix local.rebar --force
