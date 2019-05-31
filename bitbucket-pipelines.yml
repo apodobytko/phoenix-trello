@@ -14,9 +14,9 @@ pipelines:
         - npm install && node_modules/.bin/webpack --mode production
         - export DISPLAY=:99 && Xvfb :99 -screen 0 1280x1024x24 &
         - |
-         set +e
-         mix test --trace
-         exit 0
+          set +e
+          mix test --trace
+          echo $?
         - mix test --failed --trace
       services: 
         - postgres
