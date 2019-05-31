@@ -8,8 +8,9 @@ pipelines:
         - build
         - node
       script:
-        - apk add build-base chromium-chromedriver xvfb python2 nodejs-current
+        - apk add build-base chromium-chromedriver xvfb python2 nodejs npm
         - chromedriver --port=4444 --url-base=wd/hub &
+        - curl localhost:4444/wd/hub/status
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
         - npm install && node_modules/.bin/webpack --mode production
