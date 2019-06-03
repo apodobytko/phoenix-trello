@@ -10,6 +10,7 @@ pipelines:
         - apk add build-base
         - mix local.hex --force && mix local.rebar --force
         - MIX_ENV=test mix do deps.get --only test, deps.compile, compile --warnings-as-errors
+        - mix test --exclude integration --trace
       services: 
         - postgres
 
