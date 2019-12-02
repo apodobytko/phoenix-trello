@@ -23,7 +23,7 @@ jobs:
       with:
         otp-version: 22.x
         elixir-version: 1.9.x
-    - uses: nanasess/setup-chromedriver@v1.0.0
+    - uses: nanasess/setup-chromedriver@master
       with:
         chromedriver-version: '78.0.3904.105'
     
