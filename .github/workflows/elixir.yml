@@ -8,9 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      db:
-        image: postgres:11
-        ports: ['5432:5432']
+      postgres:
+        image: postgres
+        ports: 
+          - 5432:5432
         env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
@@ -29,11 +30,17 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
       with:
         chromedriver-version: '78.0.3904.105'
-    - run: |
+    
+    - name: Start chromedriver
+      run: |
         export DISPLAY=:99
         chromedriver --url-base=/wd/hub &
         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
-    - run: mix deps.get
-    - run: mix test
+    
+    - name: Install deps
+      run: mix deps.get
+    
+    - name: Run Tests
+      run: mix test
       env:
         DB_HOST: postgres
