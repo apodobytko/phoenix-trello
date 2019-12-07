@@ -38,8 +38,8 @@ jobs:
         MIX_ENV=test mix do deps.get --only test, deps.compile
         npm install && node_modules/.bin/webpack --mode production
 
-    - name: Check chromedriver
-      run: curl -XPOST http://localhost:4444/wd/hub/session -d '{"desiredCapabilities":{"browserName":"chrome"}}'
+    # - name: Check chromedriver
+      # run: curl -XPOST http://localhost:4444/wd/hub/session -d '{"desiredCapabilities":{"browserName":"chrome"}}'
     
     - name: Run Tests
       run: |
