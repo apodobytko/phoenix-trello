@@ -26,11 +26,15 @@ jobs:
     - uses: nanasess/setup-chromedriver@master
       with:
         chromedriver-version: '80.0.3987.16'
+
+    - name: Upgrade Google Chrome
+      run:  |
+        sudo apt-get --only-upgrade install google-chrome-stable
+        google-chrome --version
     
     - name: Start chromedriver
       run: |
         chromedriver --version
-        google-chrome --version
         export DISPLAY=:99
         chromedriver --port=4444 --url-base=wd/hub > chromedriver.log 2>&1 &
         sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
